@@ -1,8 +1,8 @@
-import Memory from '../models/Memory.js';
+import memorySchema from '../models/Memory.js';
 
 export const getMemory = async (req, res) => {
     try {
-        const Memorys = await Memory.find();
+        const Memorys = await memorySchema.find();
         return res.send(Memorys);
     }
     catch (err) {
@@ -13,7 +13,7 @@ export const getMemory = async (req, res) => {
 export const postMemory = async (req, res) => {
     try {
         const { image, date, description } = req.body;
-        const memory = new Memory({ image, date, description });
+        const memory = new memorySchema({ image, date, description });
         await memory.save();
         return res.status(200).json(memory);
     }
@@ -23,8 +23,9 @@ export const postMemory = async (req, res) => {
 }
 
 export const putMemory = async (req, res) => {
+    const { idMemory } = req.params;
+    const { description,date } = req.body;
     try {
-        const { idMemory, date, description } = req.body;
 
         const currentMemory = await memorySchema.findOne({ _id: idMemory });
 
@@ -33,22 +34,30 @@ export const putMemory = async (req, res) => {
 
         const memoryUpdated = await memorySchema.findByIdAndUpdate(
             {
-                _id: idMemory,
+              _id: idMemory,
             },
             currentMemory,
             {
-                new: true,
+                new: true
             }
-        );
-
-        return res.status(200).json({
+          );
+    
+          return res.status(200).json({
             data: memoryUpdated,
-        });
+          });
 
-    } catch (error) {
-        return res.status(500).json({
-            msg: `An error ocurred 😡`,
-            error,
-        });
+    } catch (err) {
+        console.log(err);
     }
-};
+}
+
+export const deleteMemory = async (req,res) => {
+    const { idMemory } = req.params;
+    try {
+        await memorySchema.deleteOne({ _id: idMemory});
+        return res.status(200).send('Recuerdo Eliminado');
+    }
+    catch(err) {
+        console.log(err);
+    }
+}
