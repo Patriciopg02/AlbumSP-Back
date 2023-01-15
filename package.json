@@ -1,22 +1,23 @@
 {
     "dependencies": {
-      "cors": "^2.8.5",
-      "dotenv": "^16.0.3",
-      "express": "^4.18.2",
-      "mongoose": "^6.6.5",
-      "mongoose-paginate-v2": "^1.7.1",
-      "morgan": "^1.10.0",
-      "nodemon": "^2.0.20"
+        "cloudinary": "^1.33.0",
+        "cors": "^2.8.5",
+        "dotenv": "^16.0.3",
+        "express": "^4.18.2",
+        "mongoose": "^6.6.5",
+        "mongoose-paginate-v2": "^1.7.1",
+        "morgan": "^1.10.0",
+        "nodemon": "^2.0.20"
     },
     "name": "proyecto-mongodb-backend",
     "version": "1.0.0",
     "main": "index.js",
     "type": "module",
     "scripts": {
-      "start": "nodemon src/api/index.js"
+        "start": "nodemon src/api/index.js"
     },
     "keywords": [],
     "author": "",
     "license": "ISC",
     "description": ""
-  }
+}
